@@ -38,9 +38,9 @@ Back to your code editor, open a new terminal. Log into Firebase CLI:
 
 Start connecting your Firebase project:
 ```firebase init```
-and follow the prompts. **When asked if you'd like to overwrite `firestore.rules`, choose 'No'.**
+and follow the prompts. **When asked if you'd like to overwrite `firestore.rules`, choose 'No'.** This project is set up to use Firestore, Functions, and Emulators. Make sure you choose these options when prompted by Firebase CLI. Similarly, when asked about which emulators you want to use, choose Auth, Firestore, and Functions:
 
-This project is set up to use Firestore, Functions, and Emulators. Make sure you choose these options when prompted by Firebase CLI. Similarly, when asked about which emulators you want to use, choose Auth, Firestore, and Functions.
+https://www.loom.com/share/e419d8894bf44bfabca327b80c64b019
 
 Now that we've initialized the local Firebase directory, let's connect it to your project.
 
@@ -57,7 +57,7 @@ Congratulations! The setup process is now complete.
 
 ### What's Next?
 
-Checkout the next tutorial with `git checkout 02-create-read-test` and follow instructions in its Readme to start interacting with Firestore and testing your app.
+Move on to the next tutorial with `git checkout 02-create-read-test` and follow instructions in its Readme to start interacting with Firestore and testing your app.
 
 ## Contribute
 
