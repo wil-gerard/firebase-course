@@ -30,7 +30,7 @@ Clone this repo:
 
 
 Install the dependencies:
-```cd .\firebase-boilerplate-draft\ && npm install```
+```cd .\react-firebase-starter\ && npm install```
 
 Do the same in the `/functions` folder to use Firebase cloud functions:
 ```cd functions && npm install```
