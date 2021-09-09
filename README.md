@@ -26,7 +26,7 @@ You will need the following to use this starter:
 ## Setup Guide
 
 Clone this repo:
-```git clone https://github.com/dariatsvetkova/firebase-boilerplate-draft.git```
+```git clone https://github.com/codebusters-ca/react-firebase-starter.git```
 
 
 Install the dependencies:
