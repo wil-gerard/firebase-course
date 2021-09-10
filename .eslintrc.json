@@ -25,9 +25,7 @@
             "ignoreComments": true,
             "ignorePattern": "^\\s*<.*>\\s*$"
         }],
-        "no-console": ["error", {
-            "allow": ["warn", "error"]
-        }],
+        "no-console": "off",
         "react/prop-types": 0,
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "linebreak-style": [0, "error", "windows"],

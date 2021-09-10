@@ -13,8 +13,8 @@ service cloud.firestore {
     }
 
     match /test_documents/{id} {
-      allow update: if (request.auth != null &&
-      resource.data.authorId == request.auth.uid);
+      allow create, read: if true;
+      allow update: if resource.data.authorId == request.auth.uid;
     }
   }
 }

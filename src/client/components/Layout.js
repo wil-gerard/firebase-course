@@ -6,6 +6,7 @@ import {
   Menu,
   Transition,
 } from '@headlessui/react';
+import { NavLink } from 'react-router-dom';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
 import firebase from '../../firebase/clientApp';
 import { useUser } from './user-context';
@@ -77,13 +78,33 @@ const Layout = ({ children }) => {
                         </Transition>
                       </Menu>
                     ) : (
-                      <button
-                        type="button"
-                        onClick={() => auth.signInWithPopup(googleAuthProvider)}
-                        className="inline-flex items-center px-2.5 py-1.5 rounded-md shadow text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400"
-                      >
-                        Sign In
-                      </button>
+                      <>
+                        <NavLink
+                          exact
+                          to="/"
+                          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                          activeClassName="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                        >
+                          Home
+                        </NavLink>
+
+                        <NavLink
+                          to="/forms"
+                          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                          activeClassName="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+                        >
+                          Forms
+                        </NavLink>
+                        <button
+                          type="button"
+                          onClick={
+                            () => auth.signInWithPopup(googleAuthProvider)
+                          }
+                          className="inline-flex items-center px-2.5 py-1.5 rounded-md shadow text-base font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cyan-400"
+                        >
+                          Sign In
+                        </button>
+                      </>
                     )}
                 </div>
               </div>
