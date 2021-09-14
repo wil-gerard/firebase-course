@@ -39,6 +39,7 @@
     "@google-cloud/firestore": "^4.14.1",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.2.0",
+    "dotenv-webpack": "^7.0.3",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.24.0",
