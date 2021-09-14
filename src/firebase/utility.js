@@ -1,5 +1,5 @@
 // Collection names
-export const TEST_DOCUMENTS = 'test_documents';
+export const ANIMALS = 'animals';
 
 // Utility functions
 export function cleanData(data) {

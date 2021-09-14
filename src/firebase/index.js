@@ -1,5 +1,5 @@
 import {
-  TEST_DOCUMENTS,
+  ANIMALS,
 } from './utility';
 
 import {
@@ -12,7 +12,7 @@ import {
 
 // API functions
 export {
-  TEST_DOCUMENTS,
+  ANIMALS,
   createAnimal,
   updateAnimal,
 };

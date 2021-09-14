@@ -14,12 +14,12 @@ const Form = ({
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('submitting animal:', animal);
     handleData({ animal });
+    setAnimal('');
   };
 
   return (
-    <div className={`${disabled ? 'opacity-50' : ''} bg-white shadow rounded-lg w-11/12 sm:w-6/12 mx-auto my-4 z-10`}>
+    <div className={`${disabled ? 'opacity-50' : ''} bg-white shadow rounded-lg w-11/12 sm:w-6/12 mx-auto my-4 z-10 transition-all duration-300 ease-in-out`}>
       <div className="px-4 py-5 sm:p-6">
         <h3 className="text-lg leading-6 font-medium text-gray-900">
           {text.h3}
@@ -39,6 +39,7 @@ const Form = ({
               type="text"
               name="createAnimal"
               id="createAnimal"
+              disabled={disabled}
               value={animal}
               placeholder="Hedgehog"
               onChange={(e) => handleChange(e)}
