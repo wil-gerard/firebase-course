@@ -11,6 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
+  devtool: 'source-map',
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     port: 3000,
@@ -51,6 +52,7 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: './src/client/index.html',
       filename: './index.html',
+      favicon: './src/client/favicon.png',
     }),
   ],
 };
