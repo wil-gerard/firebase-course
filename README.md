@@ -1,6 +1,6 @@
 # 3 - Interacting With Firestore
 
-This tutorial is based on a React and Firebase Starter that we created. You can read more about it in its [readme](https://github.com/codebusters-ca/react-firebase-starter#react--firebase-starter).
+This tutorial is based on the **React and Firebase Starter💞** that we created. You can read more about it in its [readme](https://github.com/codebusters-ca/react-firebase-starter#react--firebase-starter).
 
 ## Prerequisites 
 
@@ -24,7 +24,7 @@ Inside, you will find a home page and `/forms` page. Forms are the place from wh
 
 ## What's Next?
 
-Move on to the next tutorial with `git checkout 03-test` and follow instructions in its Readme to start interacting with Firestore and testing your app.
+Next tutorial is coming soon!
 
 ## Contribute
 
