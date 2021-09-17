@@ -1,3 +1,5 @@
+// Script brought to you by Code Busters - https://www.codebusters.ca/
+
 const { writeFile } = require('fs');
 const { exec } = require('child_process');
 
