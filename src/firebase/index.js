@@ -1,18 +1,23 @@
 import {
-  ANIMALS,
+  TODOS,
 } from './utility';
 
 import {
-  createAnimal,
+  createTodo,
 } from './create';
 
 import {
-  updateAnimal,
+  updateTodo,
 } from './update';
+
+import {
+  deleteTodo,
+} from './delete';
 
 // API functions
 export {
-  ANIMALS,
-  createAnimal,
-  updateAnimal,
+  TODOS,
+  createTodo,
+  updateTodo,
+  deleteTodo,
 };

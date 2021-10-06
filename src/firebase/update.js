@@ -1,7 +1,8 @@
+import toast from 'react-hot-toast';
 import firebase from './clientApp';
 import {
   cleanData,
-  ANIMALS,
+  TODOS,
 } from './utility';
 
 async function update(path, data) {
@@ -9,7 +10,7 @@ async function update(path, data) {
   const auth = firebase.auth();
 
   if (!path || !data) {
-    throw new ReferenceError('skip update: no path or data provided');
+    throw new ReferenceError('No path or data provided');
   }
 
   // Remove any empty values
@@ -29,15 +30,17 @@ async function update(path, data) {
   return documentRef.id;
 }
 
-export async function updateAnimal(id, data) {
-  const path = `${ANIMALS}/${id}`;
+export async function updateTodo(id, data) {
+  const path = `${TODOS}/${id}`;
 
   update(path, data)
     .then((docId) => {
       console.log(`Document updated at ${path}`);
+      toast.success('Item updated');
       return docId;
     })
     .catch((error) => {
-      console.error('Error updating the document: ', error);
+      console.error(error);
+      toast.error('Error updating item');
     });
 }

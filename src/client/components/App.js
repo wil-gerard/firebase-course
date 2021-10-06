@@ -7,11 +7,12 @@ import {
 } from 'react-router-dom';
 
 import 'tailwindcss/tailwind.css';
+import { Toaster } from 'react-hot-toast';
 import Layout from './Layout';
 import { UserProvider } from './user-context';
 
 import Home from '../pages/Home';
-import Forms from '../pages/Forms';
+import MyList from '../pages/MyList';
 import NotFound from '../pages/NotFound';
 
 const App = () => (
@@ -23,8 +24,8 @@ const App = () => (
             <Home />
           </Route>
 
-          <Route path="/forms">
-            <Forms />
+          <Route path="/my-list">
+            <MyList />
           </Route>
 
           <Route path="*">
@@ -32,6 +33,7 @@ const App = () => (
           </Route>
         </Switch>
       </Layout>
+      <Toaster />
     </UserProvider>
   </Router>
 );

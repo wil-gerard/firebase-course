@@ -1,5 +1,5 @@
 // Collection names
-export const ANIMALS = 'animals';
+export const TODOS = 'todos';
 
 // Utility functions
 export function cleanData(data) {

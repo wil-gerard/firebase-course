@@ -23,7 +23,7 @@ const Layout = ({ children }) => {
 
   const navigation = [
     { name: 'Home', href: '/', exact: true },
-    { name: 'Forms', href: '/forms', exact: false },
+    { name: 'My List', href: '/my-list', exact: false },
   ];
 
   return (
@@ -120,6 +120,7 @@ const Layout = ({ children }) => {
                     <NavLink
                       key={item.name}
                       to={item.href}
+                      exact
                       className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                     >
                       {item.name}
