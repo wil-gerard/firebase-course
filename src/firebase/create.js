@@ -41,7 +41,7 @@ export async function createTodo(name) {
 
   create(TODOS, data)
     .then((newDocId) => {
-      console.log(`New list created at ${TODOS}/${newDocId}`);
+      console.log(`New item created at ${TODOS}/${newDocId}`);
       toast.success('Item created');
       return newDocId;
     })
