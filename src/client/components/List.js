@@ -1,6 +1,6 @@
 import React from 'react';
 import { useCollection } from 'react-firebase-hooks/firestore';
-import { TODOS } from '../../firebase';
+import { TODOS } from '../../firebase/index';
 import firebase from '../../firebase/clientApp';
 import { useUser } from './user-context';
 import Todo from './Todo';
@@ -28,8 +28,12 @@ const List = () => {
   const db = firebase.firestore();
 
   const [items, loading, error] = useCollection(
-    db.collection(TODOS).where('createdBy', '==', user.uid),
-    { snapshotListenOptions: true },
+    db.collection(TODOS)
+      .where('createdBy', '==', user.uid)
+      .orderBy('createdAt', 'desc'),
+    {
+      snapshotListenOptions: { includeMetadataChanges: true },
+    },
   );
 
   return (
