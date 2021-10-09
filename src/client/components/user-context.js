@@ -1,11 +1,15 @@
 import React, { useEffect } from 'react';
-import useLocalStorage from '../hooks/useLocalStorage';
 import firebase from '../../firebase/clientApp';
+import useLocalStorage from '../hooks/useLocalStorage';
+import { USERS } from '../../firebase/index';
 
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
   const [user, setUser] = useLocalStorage('user', {});
+  const [teamId, setTeamId] = useLocalStorage('teamId', '');
+
+  const db = firebase.firestore();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((id) => {
@@ -13,7 +17,17 @@ function UserProvider({ children }) {
     });
   }, []);
 
-  const value = { user, setUser };
+  useEffect(() => {
+    if (user) {
+      db.collection(USERS).doc(user.uid).get()
+        .then((userDoc) => setTeamId(userDoc.data().teamId))
+        .catch((error) => console.error(error));
+    } else {
+      setTeamId(null);
+    }
+  }, [user]);
+
+  const value = { user, setUser, teamId };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 

@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { XIcon } from '@heroicons/react/outline';
 import { updateTodo, deleteTodo } from '../../firebase';
 
 const Todo = ({ item }) => {
-  const [checked, setChecked] = useState(item.done);
+  // const [checked, setChecked] = useState(item.done);
 
   const handleCheckbox = () => {
     updateTodo(
       item.id,
-      { done: !checked },
-    )
-      .finally(() => setChecked(!checked));
+      { done: !item.done },
+    );
   };
 
   const handleDelete = () => {
@@ -18,15 +17,15 @@ const Todo = ({ item }) => {
   };
 
   return (
-    <fieldset className="space-y-5">
+    <fieldset>
       <legend className="sr-only">To-do item</legend>
-      <div className="flex justify-between items-center h-5">
+      <div className="flex justify-between items-center my-2 h-5">
         <label htmlFor="item" className="flex items-center text-sm text-gray-700">
           <input
             id={item.id}
             name="item"
             type="checkbox"
-            checked={checked}
+            checked={item.done}
             onChange={handleCheckbox}
             className="mr-3 focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
           />

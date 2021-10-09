@@ -1,5 +1,7 @@
 import {
   TODOS,
+  USERS,
+  TEAMS,
 } from './utility';
 
 import {
@@ -17,6 +19,8 @@ import {
 // API functions
 export {
   TODOS,
+  USERS,
+  TEAMS,
   createTodo,
   updateTodo,
   deleteTodo,

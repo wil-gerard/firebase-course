@@ -10,9 +10,11 @@ import 'tailwindcss/tailwind.css';
 import { Toaster } from 'react-hot-toast';
 import Layout from './Layout';
 import { UserProvider } from './user-context';
+import PrivateRoute from './PrivateRoute';
 
 import Home from '../pages/Home';
 import MyList from '../pages/MyList';
+import MyTeam from '../pages/MyTeam';
 import NotFound from '../pages/NotFound';
 
 const App = () => (
@@ -24,9 +26,15 @@ const App = () => (
             <Home />
           </Route>
 
-          <Route path="/my-list">
-            <MyList />
-          </Route>
+          <PrivateRoute
+            path="/my-list"
+            component={MyList}
+          />
+
+          <PrivateRoute
+            path="/my-team"
+            component={MyTeam}
+          />
 
           <Route path="*">
             <NotFound />

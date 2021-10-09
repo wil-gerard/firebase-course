@@ -4,9 +4,10 @@ import { Helmet } from 'react-helmet';
 import { useUser } from '../components/user-context';
 import Form from '../components/Form';
 import List from '../components/List';
+import Card from '../components/Card';
 
 const MyList = () => {
-  const { user } = useUser();
+  const { user, teamId } = useUser();
 
   return (
     <>
@@ -17,20 +18,21 @@ const MyList = () => {
       </Helmet>
 
       <main>
-        {user ? (
-          <>
-            <List />
-            <Form />
-          </>
-        ) : (
-          <div className="bg-white shadow rounded-lg w-11/12 sm:w-6/12 mx-auto my-4 z-10">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg leading-6 font-medium text-gray-900">
-                ⚠️ You need to sign in to view this page
-              </h3>
-            </div>
-          </div>
-        )}
+        <Card>
+          <h1 className="text-2xl leading-6 font-medium text-gray-900">
+            Your to-do list
+          </h1>
+        </Card>
+
+        <Card>
+          <List
+            uid={user.uid}
+            teamId={teamId}
+          />
+        </Card>
+
+        <Form />
+
       </main>
     </>
   );
