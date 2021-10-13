@@ -3,6 +3,7 @@ import firebase from './clientApp';
 import {
   cleanData,
   TODOS,
+  USERS,
 } from './utility';
 
 async function update(path, data) {
@@ -42,5 +43,20 @@ export async function updateTodo(id, data) {
     .catch((error) => {
       console.error(error);
       toast.error('Error updating item');
+    });
+}
+
+export async function updateUser(uid, data) {
+  const path = `${USERS}/${uid}`;
+
+  update(path, data)
+    .then((userId) => {
+      console.log(`User updated at ${path}`);
+      toast.success('Profile updated!');
+      return userId;
+    })
+    .catch((error) => {
+      console.error(error);
+      toast.error('Error updating profile');
     });
 }

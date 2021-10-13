@@ -2,12 +2,8 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    function isAdmin (teamId) {
-      return request.auth.uid in get(/databases/$(database)/documents/teams/$(teamId)).data.admins;
-    }
-
-    function isTeamMember (teamId) {
-      return request.auth.uid in get(/databases/$(database)/documents/teams/$(teamId)).data.users;
+    function isAdmin () {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin;
     }
 
     // Start by closing all access by default, then add what you need
@@ -21,37 +17,17 @@ service cloud.firestore {
     }
 
     match /todos/{id} {
-      // User can view their own to-do items
-      allow read: if resource.data.uid == request.auth.uid ||
-      // Any team member can view to-do items of other team members
-        isTeamMember(resource.data.teamId);
-
-      // User can create a to-do item for themselves
-      allow create: if request.resource.data.uid == request.auth.uid ||
-      // Team admin can create a to-do item for a team member
-        isAdmin(request.resource.data.teamId);
-
-      // User can edit their own to-do items
-      allow update, delete: if resource.data.uid == request.auth.uid ||
-      // Team admin can edit users' items
-        isAdmin(resource.data.teamId);
+      allow create: if request.auth.uid != null &&
+        request.resource.data.uid == request.auth.uid;                      // Any authenticated user can create to-do items for themselves
+      allow read, update, delete: if resource.data.uid == request.auth.uid; // Users can view and update their own to-do items
     }
 
     match /users/{id} {
-      // Any user can create a profile and view others' profiles
-      allow create, read: if request.auth != null;
+      allow create, read: if request.auth != null;                // Any authenticated user can create a profile and view others' profiles
 
-      // Users can edit only their own profile
-      allow update, delete: if (request.auth != null &&
-        id == request.auth.uid);
-    }
-
-    match /teams/{id} {
-      // Any user can create and view a team
-      allow create, read: if request.auth != null;
- 
-      // Only team admin can edit a team
-      allow update, delete: if isAdmin(id);
+      allow update: if (resource.data.uid == request.auth.uid ||  // Users can edit their own profile
+        isAdmin()) &&                                             // Admins can edit any profile
+        request.resource.data.isAdmin == resource.data.isAdmin;   // isAdmin field cannot be updated by anyone
     }
   }
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import { useDocumentDataOnce } from 'react-firebase-hooks/firestore';
 import { USERS } from '../../firebase/index';
 import firebase from '../../firebase/clientApp';
-import List from './List';
+import TodoList from './TodoList';
 import Card from './Card';
 
 const Teammate = ({ uid, teamId }) => {
@@ -24,7 +24,7 @@ const Teammate = ({ uid, teamId }) => {
                 {teammate.displayName}
               </h3>
             </div>
-            <List
+            <TodoList
               uid={uid}
               teamId={teamId}
             />

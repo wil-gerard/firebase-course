@@ -3,15 +3,14 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 import { TODOS } from '../../firebase/index';
 import firebase from '../../firebase/clientApp';
 import LoadingError from './LoadingError';
-import Todo from './Todo';
+import TodoItem from './TodoItem';
 
-const List = ({ uid, teamId }) => {
+const TodoList = ({ uid }) => {
   const db = firebase.firestore();
 
   const [items, loading, error] = useCollectionData(
     db.collection(TODOS)
       .where('uid', '==', uid)
-      .where('teamId', '==', teamId)
       .orderBy('createdAt', 'desc'),
     {
       snapshotListenOptions: { includeMetadataChanges: true },
@@ -31,7 +30,7 @@ const List = ({ uid, teamId }) => {
       )}
       <form>
         {items && items.map((item) => (
-          <Todo key={item.id} item={item} />
+          <TodoItem key={item.id} item={item} />
         ))}
       </form>
 
@@ -39,4 +38,4 @@ const List = ({ uid, teamId }) => {
   );
 };
 
-export default List;
+export default TodoList;

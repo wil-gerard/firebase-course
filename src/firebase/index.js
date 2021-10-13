@@ -10,6 +10,7 @@ import {
 
 import {
   updateTodo,
+  updateUser,
 } from './update';
 
 import {
@@ -23,5 +24,6 @@ export {
   TEAMS,
   createTodo,
   updateTodo,
+  updateUser,
   deleteTodo,
 };

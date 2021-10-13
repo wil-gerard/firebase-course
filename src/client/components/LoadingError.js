@@ -33,7 +33,7 @@ const LoadingError = ({
         </Card>
       )}
 
-      {error && (
+      {(error || (!loading && !data)) && (
         <Card>
           <h3 className="text-lg leading-6 font-medium text-gray-900">
             {options.error.h3}
