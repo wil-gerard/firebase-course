@@ -18,7 +18,7 @@ service cloud.firestore {
 
     match /todos/{id} {
       allow create: if request.auth.uid != null &&
-        request.resource.data.uid == request.auth.uid;                      // Any authenticated user can create to-do items for themselves
+        request.data.uid == request.auth.uid;                      // Any authenticated user can create to-do items for themselves
       allow read, update, delete: if resource.data.uid == request.auth.uid; // Users can view and update their own to-do items
     }
 
@@ -27,7 +27,7 @@ service cloud.firestore {
 
       allow update: if (resource.data.uid == request.auth.uid ||  // Users can edit their own profile
         isAdmin()) &&                                             // Admins can edit any profile
-        request.resource.data.isAdmin == resource.data.isAdmin;   // isAdmin field cannot be updated by anyone
+        request.data.isAdmin == resource.data.isAdmin;   // isAdmin field cannot be updated by anyone
     }
   }
 }
