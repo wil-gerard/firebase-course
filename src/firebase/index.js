@@ -4,9 +4,7 @@ import {
   TEAMS,
 } from './utility';
 
-import {
-  createTodo,
-} from './create';
+import createTodo from './create';
 
 import {
   updateTodo,

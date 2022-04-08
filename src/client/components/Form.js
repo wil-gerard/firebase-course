@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { createTodo } from '../../firebase/index';
+import { useUser } from './user-context';
 
 const Form = () => {
+  const { user } = useUser();
+
   const [item, setItem] = useState('');
   const [isSubmitting, setSubmitting] = useState(false);
 
@@ -13,7 +16,7 @@ const Form = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     setSubmitting(true);
-    createTodo(item)
+    createTodo(item, user.uid)
       .finally(() => {
         setSubmitting(false);
         setItem('');

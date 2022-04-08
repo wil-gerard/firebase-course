@@ -1,11 +1,6 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    function isAdmin () {
-      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin;
-    }
-
     // Start by closing all access by default, then add what you need
     match /{document=**} {
       allow read, write: if false;
@@ -14,20 +9,6 @@ service cloud.firestore {
     match /test/{docId} {
       allow read: if true;
       allow write: if false;
-    }
-
-    match /todos/{id} {
-      allow create: if request.auth.uid != null &&
-        request.data.uid == request.auth.uid;                      // Any authenticated user can create to-do items for themselves
-      allow read, update, delete: if resource.data.uid == request.auth.uid; // Users can view and update their own to-do items
-    }
-
-    match /users/{id} {
-      allow create, read: if request.auth != null;                // Any authenticated user can create a profile and view others' profiles
-
-      allow update: if (resource.data.uid == request.auth.uid ||  // Users can edit their own profile
-        isAdmin()) &&                                             // Admins can edit any profile
-        request.data.isAdmin == resource.data.isAdmin;   // isAdmin field cannot be updated by anyone
     }
   }
 }

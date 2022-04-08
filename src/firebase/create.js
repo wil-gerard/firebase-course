@@ -33,9 +33,10 @@ async function create(collection, data) {
   return newDocumentId;
 }
 
-export async function createTodo(name) {
+export default async function createTodo(name, userId) {
   const data = {
     name,
+    uid: userId,
     done: false,
   };
 

@@ -24,8 +24,7 @@ const Layout = ({ children }) => {
   const navigation = [
     { name: 'Home', href: '/', exact: true },
     { name: 'My List', href: '/my-list', exact: false },
-    { name: 'Users', href: '/users', exact: false },
-    // { name: 'My Team', href: '/my-team', exact: false },
+    { name: 'My Profile', href: `/profile/${user.uid}`, exact: false },
   ];
 
   return (

@@ -15,7 +15,6 @@ import PrivateRoute from './PrivateRoute';
 import Home from '../pages/Home';
 import MyList from '../pages/MyList';
 import Users from '../pages/Users';
-// import MyTeam from '../pages/MyTeam';
 import NotFound from '../pages/NotFound';
 import Profile from '../pages/Profile';
 
