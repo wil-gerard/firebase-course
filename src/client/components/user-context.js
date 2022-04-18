@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import firebase from '../../firebase/clientApp';
-import useLocalStorage from '../hooks/useLocalStorage';
 
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
-  const [user, setUser] = useLocalStorage('user', {});
+  const [user, setUser] = useState();
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((id) => {
