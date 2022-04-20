@@ -6,7 +6,14 @@ import 'firebase/auth';
 import 'firebase/firestore';
 
 // Replace this with your app's configuration from Firebase Console
-const firebaseConfig = { projectId: 'demo-codebusters' };
+const firebaseConfig = {
+  apiKey: 'AIzaSyBAcAgGSADla4CUqZijWc6OowVbFQjGbJ8',
+  authDomain: 'fir-codebusters-7ad88.firebaseapp.com',
+  projectId: 'fir-codebusters-7ad88',
+  storageBucket: 'fir-codebusters-7ad88.appspot.com',
+  messagingSenderId: '74784526031',
+  appId: '1:74784526031:web:eb8b393e11b95e4993b1ba',
+};
 
 firebase.initializeApp(firebaseConfig);
 
