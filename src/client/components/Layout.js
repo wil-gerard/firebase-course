@@ -20,13 +20,15 @@ const Layout = ({ children }) => {
   const auth = firebase.auth();
   const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
   const { user } = useUser();
+  const navLink = user ? `${user.uid}` : `nope`
 
   const navigation = [
     { name: 'Home', href: '/', exact: true },
     { name: 'My List', href: '/my-list', exact: false },
-    { name: 'My Profile', href: `/profile/${user.uid}`, exact: false },
   ];
-
+  const signOut =()=>{
+    console.log("WORKS ZZZ")
+  }
   return (
     <div className="bg-gray-900 min-h-screen">
       <Popover as="header" className="relative">
@@ -85,7 +87,7 @@ const Layout = ({ children }) => {
                             leaveFrom="transform opacity-100 scale-100"
                             leaveTo="transform opacity-0 scale-95"
                           >
-                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-10">
                               <Menu.Item>
                                 <p className="w-full block px-4 py-2 text-base text-center text-gray-700">
                                   {user.displayName}
@@ -96,7 +98,7 @@ const Layout = ({ children }) => {
                                   <button
                                     type="button"
                                     onClick={() => firebase.auth().signOut()}
-                                    className={classNames(active ? 'bg-gray-100' : '', 'w-full block px-4 py-2 text-base font-medium text-gray-700')}
+                                    className={classNames(active ? 'bg-gray-100' : '', 'w-full block px-4 py-2 text-base font-medium text-gray-700 ')}
                                   >
                                     Sign out
                                   </button>
