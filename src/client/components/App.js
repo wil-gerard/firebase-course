@@ -34,18 +34,14 @@ const App = () => (
 
           <PrivateRoute
             path="/users"
+            exact
             component={Users}
           />
 
           <PrivateRoute
-            path="/profile/:uid"
+            path="/users/:uid"
             component={Profile}
           />
-
-          {/* <PrivateRoute
-            path="/my-team"
-            component={MyTeam}
-          /> */}
 
           <Route path="*">
             <NotFound />

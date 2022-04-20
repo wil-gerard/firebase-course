@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 
 import { useUser } from '../components/user-context';
-import Form from '../components/Form';
+import TodoForm from '../components/TodoForm';
 import TodoList from '../components/TodoList';
 import Card from '../components/Card';
 
@@ -28,7 +28,7 @@ const MyList = () => {
           <TodoList uid={user.uid} />
         </Card>
 
-        <Form />
+        <TodoForm />
 
       </main>
     </>

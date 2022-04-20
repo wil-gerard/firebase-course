@@ -20,15 +20,13 @@ const Layout = ({ children }) => {
   const auth = firebase.auth();
   const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
   const { user } = useUser();
-  const navLink = user ? `${user.uid}` : `nope`
 
   const navigation = [
     { name: 'Home', href: '/', exact: true },
     { name: 'My List', href: '/my-list', exact: false },
+    { name: 'Users', href: '/users', exact: false },
   ];
-  const signOut =()=>{
-    console.log("WORKS ZZZ")
-  }
+
   return (
     <div className="bg-gray-900 min-h-screen">
       <Popover as="header" className="relative">
