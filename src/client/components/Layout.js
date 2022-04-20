@@ -21,6 +21,8 @@ const Layout = ({ children }) => {
   const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
   const { user } = useUser();
 
+  if (user?.loading) return null;
+
   const navigation = [
     { name: 'Home', href: '/', exact: true },
     { name: 'My List', href: '/my-list', exact: false },
