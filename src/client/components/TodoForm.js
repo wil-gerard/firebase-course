@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { createTodo } from '../../firebase/index';
 import { useUser } from './user-context';
 
-const Form = () => {
+const TodoForm = () => {
   const { user } = useUser();
 
   const [item, setItem] = useState('');
@@ -64,4 +64,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default TodoForm;

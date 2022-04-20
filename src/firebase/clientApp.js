@@ -7,11 +7,12 @@ import 'firebase/firestore';
 
 // Replace this with your app's configuration from Firebase Console
 const firebaseConfig = {
-  apiKey: process.env.FIREBASE_API_KEY,
-  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.FIREBASE_PROJECT_ID,
-  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
-  appId: process.env.FIREBASE_APP_ID,
+  apiKey: 'AIzaSyBAcAgGSADla4CUqZijWc6OowVbFQjGbJ8',
+  authDomain: 'fir-codebusters-7ad88.firebaseapp.com',
+  projectId: 'fir-codebusters-7ad88',
+  storageBucket: 'fir-codebusters-7ad88.appspot.com',
+  messagingSenderId: '74784526031',
+  appId: '1:74784526031:web:eb8b393e11b95e4993b1ba',
 };
 
 firebase.initializeApp(firebaseConfig);

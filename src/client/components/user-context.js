@@ -4,7 +4,7 @@ import firebase from '../../firebase/clientApp';
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({ loading: true });
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((id) => {

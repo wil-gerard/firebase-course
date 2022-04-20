@@ -66,13 +66,13 @@ const ProfileForm = ({ userDoc, isCurrentUser, adminMode }) => {
               <textarea
                 id="about"
                 name="about"
+                placeholder="Write a few sentences about yourself."
                 rows={3}
                 value={inputs.about}
                 onChange={(e) => handleChange(e)}
                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
               />
             </div>
-            <p className="mt-2 text-sm text-gray-500">Write a few sentences about yourself.</p>
           </div>
         </div>
       </div>
