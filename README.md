@@ -71,7 +71,7 @@ Congratulations! The setup process is now complete.
 
 ## Contribute
 
-🚧 This tutorial is a work in progress 🚧 We ❤️ feedback and help from fellow devs! If you found a bug, create an [issue](https://github.com/codebusters-ca/react-firebase-starter/issues/new?labels=bug) or send us a [pull request](https://github.com/codebusters-ca/react-firebase-starter/compare).
+🚧 This tutorial is a work in progress 🚧 We ❤️ feedback and help from fellow devs! If you found a bug, create an [issue](https://github.com/codebusters-ca/firebase-course/issues/new?labels=bug) or send us a [pull request](https://github.com/codebusters-ca/firebase-course/compare).
 
 ## Licence
 
