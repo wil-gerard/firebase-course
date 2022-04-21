@@ -16,7 +16,7 @@ Checkout this branch:
 ```git checkout mentorship```
 
 Install the dependencies:
-```cd .\firebase-course\ && npm ci```
+```npm ci```
 
 Do the same in the `/functions` folder to use Firebase cloud functions:
 ```cd functions && npm ci```
