@@ -12,11 +12,8 @@ You will need to have the following installed to use this course:
 
 ### Setting Up React
 
-Clone this repo:
-```git clone https://github.com/codebusters-ca/firebase-course.git```
-
 Checkout this branch:
-```git checkout 01-project-setup```
+```git checkout mentorship```
 
 Install the dependencies:
 ```cd .\firebase-course\ && npm ci```
