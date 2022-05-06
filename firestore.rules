@@ -6,11 +6,29 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // Firestore rule test
     match /test/{docId} {
       allow read: if true;
       allow write: if false;
     }
 
-    // Add new rules here
+    // Security rules for to-dos
+    match /todos/{document=**} {
+
+      function userIsAuthenticated() {
+        return (request.auth != null)
+      }
+
+      function userIsAuthor() {
+        return (request.auth.uid == resource.data.uid)
+      }
+  
+      // Any authenticated user can read or write to-do items for themselves
+      allow create: if userIsAuthenticated();
+      // Users can read their to-do items
+      allow read: if userIsAuthor();
+      // Users can update their to-do items
+      allow write: if userIsAuthor();
+    }
   }
 }

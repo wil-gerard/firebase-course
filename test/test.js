@@ -5,7 +5,7 @@ const fs = require('fs');
 
 const MY_PROJECT_ID = 'emulator-rules';
 const myId = 'user_abc';
-const theirId = 'user_xyz';
+// const theirId = 'user_xyz';
 // const modId = 'user_mod';
 const myAuth = { uid: myId, email: 'abc@gmail.com' };
 // const modAuth = { uid: modId, email: 'mod@gmail.com', isModerator: true };
@@ -37,31 +37,51 @@ describe('Setup', () => {
   it('Understands basic addition, sanity check mocha working', () => {
     assert.equal(2 + 2, 4);
   });
+});
 
-  // Test firestore rules
-  it('Allow a user to edit their own document', async () => {
+describe('To-do list firestore rules', () => {
+  it('Any authenticated user can create to-do items for themselves', async () => {
     const docId = 'form123';
-    const admin = getAdminFirestore();
-    await admin
-      .collection('test_documents')
-      .doc(docId)
-      .set({ content: 'before', authorId: myId });
-
     const db = getFirestore(myAuth);
-    const testDoc = db.collection('test_documents').doc(docId);
-    await firebase.assertSucceeds(testDoc.update({ content: 'after' }));
+
+    const docRef = db
+      .collection('todos')
+      .doc(docId);
+
+    await firebase.assertSucceeds(docRef.set({ uid: myId }));
   });
 
-  it('Don\'t allow a user to edit somebody else\'s document', async () => {
-    const docId = 'doc123';
-    const admin = getAdminFirestore();
-    await admin
-      .collection('test_documents')
-      .doc(docId)
-      .set({ content: 'before', authorId: theirId });
-
+  it('Users can read their to-do items', async () => {
+    const docId = 'form123';
     const db = getFirestore(myAuth);
-    const testDoc = db.collection('test_documents').doc(docId);
-    await firebase.assertFails(testDoc.update({ content: 'after' }));
+
+    const docRef = db
+      .collection('todos')
+      .doc(docId);
+    await docRef
+      .set({ uid: myAuth.uid });
+
+    const testDoc = db
+      .collection('todos')
+      .doc(docId);
+
+    await firebase.assertSucceeds(testDoc.get());
+  });
+
+  it('Users can update and delete their to-do items', async () => {
+    const docId = 'form123';
+    const db = getFirestore(myAuth);
+
+    const docRef = db
+      .collection('todos')
+      .doc(docId);
+    await docRef
+      .set({ content: 'before', uid: myAuth.uid });
+
+    const testDoc = db
+      .collection('todos')
+      .doc(docId);
+
+    await firebase.assertSucceeds(testDoc.update({ content: 'after' }));
   });
 });
