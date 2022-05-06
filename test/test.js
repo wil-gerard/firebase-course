@@ -5,10 +5,10 @@ const fs = require('fs');
 
 const MY_PROJECT_ID = 'emulator-rules';
 const myId = 'user_abc';
-// const theirId = 'user_xyz';
-// const modId = 'user_mod';
-const myAuth = { uid: myId, email: 'abc@gmail.com' };
-// const modAuth = { uid: modId, email: 'mod@gmail.com', isModerator: true };
+const theirId = 'user_xyz';
+const adminId = 'user_mod';
+const myAuth = { uid: myId, isAdmin: false, displayName: 'Bob' };
+const adminAuth = { uid: adminId, isAdmin: true };
 
 // Enforce firestore rules hot update in emulators
 before(async () => {
@@ -83,5 +83,71 @@ describe('To-do list firestore rules', () => {
       .doc(docId);
 
     await firebase.assertSucceeds(testDoc.update({ content: 'after' }));
+  });
+});
+
+describe('Profiles firestore rules', () => {
+  it('Any authenticated user can view profiles', async () => {
+    const db = getFirestore(myAuth);
+
+    db
+      .collection('users')
+      .doc(myAuth.uid)
+      .set(myAuth);
+
+    const testUser = db
+      .collection('users');
+
+    await firebase.assertSucceeds(testUser.get());
+  });
+
+  it('An authenticated user can create a profile', async () => {
+    const db = getFirestore(myAuth);
+
+    const testUser = db
+      .collection('users')
+      .doc(myAuth.uid);
+
+    await firebase.assertSucceeds(testUser.set(myAuth));
+  });
+
+  it('An authenticated user can edit their profile', async () => {
+    const userId = myId;
+    const user = getFirestore(myAuth);
+    await user
+      .collection('users')
+      .doc(userId)
+      .set(myAuth);
+
+    const userTest = user.collection('users').doc(userId);
+
+    await firebase.assertSucceeds(userTest.update({ displayName: 'newName' }));
+  });
+
+  // A ran into an error trying to get this test to pass. I believe it has something to do with this stale firebase-tools issue https://github.com/firebase/firebase-tools/issues/2067
+  it('An admin can edit anyones profile', async () => {
+    const admin = getFirestore(adminAuth);
+    const user = getFirestore(myAuth);
+    await user
+      .collection('users')
+      .doc(myId)
+      .set(myAuth);
+
+    const adminTest = admin.collection('users').doc(myId);
+
+    await firebase.assertSucceeds(adminTest.update({ displayName: 'newName' }));
+  });
+
+  it('isAdmin field cannot be updated by any user or admin', async () => {
+    const userId = myId;
+    const user = getFirestore(myAuth);
+    await user
+      .collection('users')
+      .doc(userId)
+      .set({ displayName: 'test user', isAdmin: false, uid: userId });
+
+    const userTest = user.collection('users').doc(userId);
+
+    await firebase.assertFails(userTest.update({ isAdmin: true }));
   });
 });
