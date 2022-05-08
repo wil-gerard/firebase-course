@@ -6,12 +6,13 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
-    // Firestore rule test
+    // Firestore.rule test
     match /test/{docId} {
       allow read: if true;
       allow write: if false;
     }
 
+    // Helper functions
     function userIsAuthenticated() {
       return (request.auth != null)
     }
@@ -20,39 +21,30 @@ service cloud.firestore {
       return (request.auth.uid == resource.data.uid)
     }
 
-    function adminIsModified() {
+    function isAdminFieldModified() {
       return 'isAdmin' in resource.data.diff(request.resource.data).affectedKeys();
     }
 
-    function userIsAdmin(userId) {
-      return get(/databases/$(database)/documents/users/$(userId)).data.isAdmin;
+    function userIsAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin;
     }
 
-    function userIsAuthorOrAdmin(userId) {
-      return userIsAuthor() || userIsAdmin(userId)
+    function userIsAuthorOrAdmin() {
+      return userIsAuthor() || userIsAdmin()
     }
 
     // Security rules for to-dos
     match /todos/{document=**} {
-      // Any authenticated user can read or write to-do items for themselves
       allow create: if userIsAuthenticated();
-      // Users can read their to-do items
-      allow read: if userIsAuthor();
-      // Users can update their to-do items
-      allow write: if userIsAuthor();
+      allow read, write: if userIsAuthor();
     }
 
     // Security rules for profiles
     match /users/{document=**} {
-      // Any authenticated user can create a profile and view others' profiles
       allow read, create: if userIsAuthenticated();
-      // A profile can be updated if
-      //  the user is authenticated and
-      //  the user is the author or an admin and
-      //  the isAdmin field has not been modified 
       allow update: if userIsAuthenticated() && 
-        userIsAuthorOrAdmin(request.auth.uid) && 
-        adminIsModified() != true;
+        userIsAuthorOrAdmin() && 
+        isAdminFieldModified() != true;
     }
   }
 }
