@@ -6,11 +6,45 @@ service cloud.firestore {
       allow read, write: if false;
     }
 
+    // Firestore.rule test
     match /test/{docId} {
       allow read: if true;
       allow write: if false;
     }
 
-    // Add new rules here
+    // Helper functions
+    function userIsAuthenticated() {
+      return (request.auth != null)
+    }
+
+    function userIsAuthor() {
+      return (request.auth.uid == resource.data.uid)
+    }
+
+    function isAdminFieldModified() {
+      return 'isAdmin' in resource.data.diff(request.resource.data).affectedKeys();
+    }
+
+    function userIsAdmin() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data.isAdmin;
+    }
+
+    function userIsAuthorOrAdmin() {
+      return userIsAuthor() || userIsAdmin()
+    }
+
+    // Security rules for to-dos
+    match /todos/{document=**} {
+      allow create: if userIsAuthenticated();
+      allow read, write: if userIsAuthor();
+    }
+
+    // Security rules for profiles
+    match /users/{document=**} {
+      allow read, create: if userIsAuthenticated();
+      allow update: if userIsAuthenticated() && 
+        userIsAuthorOrAdmin() && 
+        isAdminFieldModified() != true;
+    }
   }
 }
